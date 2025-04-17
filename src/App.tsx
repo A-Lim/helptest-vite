@@ -1,18 +1,41 @@
+import { useEffect } from 'react';
 import './App.css';
 import { DataTableDemo } from './components/datatable';
 import Header from './components/header';
 import Subscription from './components/subscription';
 import TicketStats from './components/ticket-stats';
 import { ScrollArea } from './components/ui/scroll-area';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs';
 import { InterativeBar } from './interactive-bar';
 
 function App() {
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	console.log(window);
+	useEffect(() => {
+		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+		// const onMessageReceive = (event: any) => {
+		// 	console.log('EVENT', event);
+		// 	console.log('EVENT DATA', event.data);
+		// };
+		// window.addEventListener('message', onMessageReceive);
+
+		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+		console.log('ADD LISTENER');
+		window.addEventListener('storage', (event: any) => {
+			console.log('CHANGE');
+			console.log('SESSION ', event);
+		});
+
+		// return () => window.removeEventListener('message', onMessageReceive);
+	});
+
 	return (
 		<div className="h-screen bg-gray-50">
 			<ScrollArea className="h-full w-full p-4">
+				<button
+					type="button"
+					onClick={() => localStorage.setItem('test', Date.now().toString())}
+				>
+					Test
+				</button>
 				<div className="grid grid-cols-6 gap-4">
 					<Header className="col-span-6" />
 					<div className="col-span-2 space-y-1 md:space-y-1.5">

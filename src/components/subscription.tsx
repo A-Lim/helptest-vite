@@ -1,5 +1,7 @@
 import { cn } from '@/lib/utils';
 import { SubscriptionChart } from './subscription-chart';
+import { Badge } from './ui/badge';
+import { Progress } from './ui/progress';
 
 export default function Subscription({ className }: { className?: string }) {
 	return (
@@ -11,12 +13,20 @@ export default function Subscription({ className }: { className?: string }) {
 		>
 			<div className="col-span-3">
 				<div className="p-4 md:p-6 border-b">
-					<h2 className="font-medium text-xl">
-						Support & Maintenance Services
-					</h2>
-					<span className="text-sm text-muted-foreground">
-						Valid: 1 Jan 2025 - 31 Dec 2025
-					</span>
+					<div className="flex justify-between">
+						<div>
+							<h2 className="font-medium text-xl">
+								Support & Maintenance Services
+							</h2>
+							<span className="text-sm text-muted-foreground">
+								Valid: 1 Jan 2025 - 31 Dec 2025
+							</span>
+						</div>
+
+						<Badge variant="outline">3 Months Left</Badge>
+					</div>
+
+					<Progress className="mt-2" value={33} />
 				</div>
 				<div className="grid grid-cols-4 p-4 md:p-6">
 					<div className="flex flex-col gap-2">
