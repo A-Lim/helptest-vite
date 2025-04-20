@@ -1,66 +1,73 @@
-import { endOfMonth, format, startOfMonth } from 'date-fns';
-import { Calendar as CalendarIcon } from 'lucide-react';
-import * as React from 'react';
-import type { DateRange } from 'react-day-picker';
+'use client';
 
+import * as React from 'react';
+import { DATE_FORMAT } from '@/constants';
+import { format } from 'date-fns';
+import { CalendarIcon } from 'lucide-react';
+import { type DateRange } from 'react-day-picker';
+
+import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import {
-	Popover,
-	PopoverContent,
-	PopoverTrigger,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
 } from '@/components/ui/popover';
-import { DATE_FORMAT } from '@/constants';
-import { cn } from '@/lib/utils';
 
 export function DateRangePicker({
-	className,
-}: React.HTMLAttributes<HTMLDivElement>) {
-	const today = new Date();
-	const [date, setDate] = React.useState<DateRange | undefined>({
-		from: startOfMonth(today),
-		to: endOfMonth(today),
-	});
+  className,
+  onChange,
+  value,
+}: Omit<React.ComponentPropsWithoutRef<'input'>, 'value' | 'onChange'> & {
+  value?: DateRange;
+  onChange?: (dateRange?: DateRange) => void;
+}) {
+  const today = new Date();
+  const [date, setDate] = React.useState<DateRange | undefined>(value);
+  const handleDateChange = (dateRange?: DateRange) => {
+    setDate(dateRange);
+    onChange?.(dateRange);
+  };
 
-	return (
-		<div className={cn('grid gap-2')}>
-			<Popover>
-				<PopoverTrigger asChild>
-					<Button
-						id="date"
-						variant={'outline'}
-						className={cn(
-							'min-w-[230px] justify-start text-left font-normal',
-							!date && 'text-muted-foreground',
-							className,
-						)}
-					>
-						<CalendarIcon />
-						{date?.from ? (
-							date.to ? (
-								<>
-									{format(date.from, DATE_FORMAT)} -{' '}
-									{format(date.to, DATE_FORMAT)}
-								</>
-							) : (
-								format(date.from, DATE_FORMAT)
-							)
-						) : (
-							<span>Pick a date</span>
-						)}
-					</Button>
-				</PopoverTrigger>
-				<PopoverContent className="w-auto p-0" align="start">
-					<Calendar
-						initialFocus
-						mode="range"
-						defaultMonth={date?.from}
-						selected={date}
-						onSelect={setDate}
-						numberOfMonths={2}
-					/>
-				</PopoverContent>
-			</Popover>
-		</div>
-	);
+  return (
+    <div className={cn('grid gap-2', className)}>
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button
+            id="date"
+            variant={'outline'}
+            className={cn(
+              'w-64 justify-start text-left font-normal',
+              !date && 'text-muted-foreground',
+            )}
+          >
+            <CalendarIcon className="mr-2 h-4 w-4" />
+            {date?.from ? (
+              date.to ? (
+                <>
+                  {format(date.from, DATE_FORMAT)} -{' '}
+                  {format(date.to, DATE_FORMAT)}
+                </>
+              ) : (
+                format(date.from, DATE_FORMAT)
+              )
+            ) : (
+              <span>Pick a date</span>
+            )}
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-auto p-0" align="start">
+          <Calendar
+            initialFocus
+            mode="range"
+            defaultMonth={date?.from ?? today}
+            selected={date}
+            onSelect={handleDateChange}
+            numberOfMonths={2}
+          />
+        </PopoverContent>
+      </Popover>
+    </div>
+  );
 }

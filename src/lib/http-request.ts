@@ -8,11 +8,6 @@ export const httpRequest = axios.create({
   },
 });
 
-httpRequest.interceptors.request.use((config) => {
-  console.log(config);
-  return config;
-});
-
 httpRequest.interceptors.response.use(
   (response) => response.data.responseData,
   (error: unknown) => {

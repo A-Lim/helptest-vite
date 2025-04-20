@@ -46,8 +46,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   if (!auth) {
     return (
-      <div className="w-screen h-screen flex justify-center items-center bg-neutral-300/80 animate-pulse transition-opacity">
-        <div className="flex gap-2">
+      <div className="w-screen h-screen flex justify-center items-center bg-stone-950/50 transition-opacity">
+        <div className="flex gap-2 animate-pulse">
           <LoaderCircle className="animate-spin" />
           <span>Loading...</span>
         </div>

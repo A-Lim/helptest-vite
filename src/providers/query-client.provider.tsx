@@ -8,6 +8,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: false,
+      refetchOnWindowFocus: false,
       staleTime: import.meta.env.DEV ? 0 : 60 * 1000,
     },
     mutations: {

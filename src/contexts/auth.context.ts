@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { AuthContext } from '@/providers/auth.provider';
 import { toast } from 'sonner';
 
-export const useUserContext = () => {
+export const useAuthContext = () => {
   const auth = useContext(AuthContext);
 
   if (!auth) {
