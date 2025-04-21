@@ -23,7 +23,6 @@ export function DateRangePicker({
   value?: DateRange;
   onChange?: (dateRange?: DateRange) => void;
 }) {
-  const today = new Date();
   const [date, setDate] = React.useState<DateRange | undefined>(value);
   const handleDateChange = (dateRange?: DateRange) => {
     setDate(dateRange);
@@ -61,7 +60,7 @@ export function DateRangePicker({
           <Calendar
             initialFocus
             mode="range"
-            defaultMonth={date?.from ?? today}
+            defaultMonth={date?.from ?? new Date()}
             selected={date}
             onSelect={handleDateChange}
             numberOfMonths={2}

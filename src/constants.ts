@@ -1,6 +1,7 @@
 import { KubeUser } from './types/kube/kube-user.type';
 
 export const DATE_FORMAT = 'dd MMM yyyy';
+export const DATETIME_FORMAT = 'dd MMM yyyy HH:mm';
 
 // DEV USAGE ONLY
 export const DEV_TOKEN = import.meta.env.VITE_TOKEN;

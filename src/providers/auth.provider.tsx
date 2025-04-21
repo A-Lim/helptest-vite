@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, PropsWithChildren, useEffect, useState } from 'react';
 import { DEV_TOKEN, DEV_USER } from '@/constants';
 import { LoaderCircle } from 'lucide-react';
 
@@ -12,7 +12,7 @@ type KubeAuth = {
 
 export const AuthContext = createContext<KubeAuth | undefined>(undefined);
 
-const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+const AuthProvider = ({ children }: PropsWithChildren) => {
   // in DEV mode, get auth from constants
   let defaultAuth: KubeAuth | undefined = undefined;
 
@@ -32,10 +32,12 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   if (import.meta.env.PROD) {
     useEffect(() => {
+      console.log('LISTENING TO KUBE FOR AUTH DATA');
       const onMessageReceive = (event: any) => {
         if (event.origin == import.meta.env.VITE_PARENT_URL) {
           const data = event.data as { token: string; user: KubeUser };
           setAuth(data);
+          console.log('AUTH DATA RECEIVED', data);
         }
       };
       window.addEventListener('message', onMessageReceive);

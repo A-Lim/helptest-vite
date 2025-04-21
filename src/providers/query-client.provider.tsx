@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
 import {
   QueryClient,
   QueryClientProvider as TanStackQueryClientProvider,
@@ -17,11 +17,7 @@ const queryClient = new QueryClient({
   },
 });
 
-export default function QueryClientProvider({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export default function QueryClientProvider({ children }: PropsWithChildren) {
   return (
     <TanStackQueryClientProvider client={queryClient}>
       {children}
