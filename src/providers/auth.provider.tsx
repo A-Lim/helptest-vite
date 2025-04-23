@@ -34,6 +34,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     useEffect(() => {
       console.log('LISTENING TO KUBE FOR AUTH DATA');
       const onMessageReceive = (event: any) => {
+        console.log('EVENT RECEIEVED', event);
         if (event.origin == import.meta.env.VITE_PARENT_URL) {
           const data = event.data as { token: string; user: KubeUser };
           setAuth(data);

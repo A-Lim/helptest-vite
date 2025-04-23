@@ -7,4 +7,8 @@ export type KubeSubmission = {
   sys_SubmittedBy: string;
   sys_SubmittedDate: string;
   sys_Status: string;
+  sysReportedDate: string;
+  rdbSeverityLevel: string;
+  numSupportManHours: string;
+  numSupportManDays: string;
 } & Record<string, any>;

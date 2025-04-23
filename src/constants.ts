@@ -3,6 +3,13 @@ import { KubeUser } from './types/kube/kube-user.type';
 export const DATE_FORMAT = 'dd MMM yyyy';
 export const DATETIME_FORMAT = 'dd MMM yyyy HH:mm';
 
+export const SEVERITY = {
+  1: '1 - Critical',
+  2: '2 - High',
+  3: '3 - Medium',
+  4: '4 - Low',
+};
+
 // DEV USAGE ONLY
 export const DEV_TOKEN = import.meta.env.VITE_TOKEN;
 export const DEV_USER: KubeUser & Record<string, any> = {

@@ -16,7 +16,13 @@ export const useGetSubmissions = (matrix?: KubeMatrixDashboard) => {
     : undefined;
 
   const params: KubeSubmissionRequest = {
-    displayFields: ['sys_Status'],
+    displayFields: [
+      'sys_Status',
+      'sysReportedDate',
+      'rdbSeverityLevel',
+      'numSupportManHours',
+      'numSupportManDays',
+    ],
     filterFields: [
       {
         fieldCode: 'sys_SubmittedDate',
