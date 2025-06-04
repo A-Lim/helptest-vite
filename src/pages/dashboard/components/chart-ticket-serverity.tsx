@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { SEVERITY } from '@/constants';
 import { useDashboardStore } from '@/providers/dashboard.provider';
 import { Label, Pie, PieChart } from 'recharts';
@@ -10,13 +10,25 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+
+type FilterType = 'contract-period' | 'current-month';
 
 export default function ChartTicketSeverity({
   className,
 }: React.ComponentProps<'div'>) {
+  const [filter, setFilter] = useState<FilterType>('contract-period');
   const submissions = useDashboardStore((state) => state.submissions);
 
-  const chartData = useMemo(() => {
+  const { chartData, total } = useMemo(() => {
+    let total = 0;
+    const currentMonth = new Date().getMonth();
     const initialData = Object.entries(SEVERITY).map(([key, value]) => ({
       severity: value,
       label: value,
@@ -25,12 +37,23 @@ export default function ChartTicketSeverity({
     }));
 
     submissions.forEach((submission) => {
-      const index = parseInt(submission.rdbSeverityLevel) - 1;
-      initialData[index].count += 1;
+      const submittedDate = new Date(submission.sys_SubmittedDate);
+
+      if (filter === 'current-month') {
+        if (currentMonth === submittedDate.getMonth()) {
+          total += 1;
+          const index = parseInt(submission.rdbSeverityLevel) - 1;
+          initialData[index].count += 1;
+        }
+      } else {
+        total += 1;
+        const index = parseInt(submission.rdbSeverityLevel) - 1;
+        initialData[index].count += 1;
+      }
     });
 
-    return initialData;
-  }, [submissions]);
+    return { chartData: initialData, total };
+  }, [submissions, filter]);
 
   const chartConfig = {
     count: {
@@ -45,9 +68,24 @@ export default function ChartTicketSeverity({
         className,
       )}
     >
-      <h3 className="tracking-tight text-sm font-medium">
-        Tickets by Severity
-      </h3>
+      <div className="flex gap-4 justify-between">
+        <h3 className="tracking-tight text-sm font-medium">
+          Tickets by Severity (
+          {filter === 'contract-period' ? 'Contract Period' : 'Current Month'})
+        </h3>
+        <Select
+          value={filter}
+          onValueChange={(e) => setFilter(e as FilterType)}
+        >
+          <SelectTrigger className="w-[155px]">
+            <SelectValue placeholder="Filter" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="contract-period">Contract Period</SelectItem>
+            <SelectItem value="current-month">Current Month</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
       <div className="grid grid-cols-6 flex-1">
         <div className="col-span-4">
           <ChartContainer config={chartConfig} className="w-full h-full">
@@ -75,7 +113,7 @@ export default function ChartTicketSeverity({
                             y={viewBox.cy}
                             className="fill-foreground text-3xl font-bold"
                           >
-                            {submissions.length.toLocaleString()}
+                            {total.toLocaleString()}
                           </tspan>
                           <tspan
                             x={viewBox.cx}

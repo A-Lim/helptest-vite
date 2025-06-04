@@ -59,7 +59,7 @@ export default function ChartSummary({
                     <tspan
                       x={viewBox.cx}
                       y={(viewBox.cy || 0) - 8}
-                      className="fill-foreground text-lg font-bold"
+                      className="fill-foreground text-base font-bold"
                     >
                       {total.toLocaleString()}
                     </tspan>

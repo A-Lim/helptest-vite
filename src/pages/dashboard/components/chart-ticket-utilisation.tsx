@@ -26,7 +26,7 @@ type SupportUtilisationByMonth = {
   manDays: number;
 };
 
-export default function ChartSupportUlitsation({
+export default function ChartTicketUtilisation({
   className,
 }: React.ComponentProps<'div'>) {
   const [filter, setFilter] = useState('manHours');
@@ -93,7 +93,7 @@ export default function ChartSupportUlitsation({
     >
       <div className="flex gap-4 justify-between">
         <h3 className="tracking-tight text-sm font-medium">
-          Total Support Utilisation (
+          Total Ticket Utilisation (
           {filter === 'manHours' ? 'Man Hours' : 'Man Days'})
         </h3>
         <Select value={filter} onValueChange={(e) => setFilter(e)}>

@@ -83,7 +83,7 @@ export function BalanceSummary({
     <div className={cn(className, 'grid grid-cols-7 divide-x')}>
       <div className="col-span-2 text-center p-2">
         <p className="text-muted-foreground text-xs">
-          Balance {type === 'man-days' ? 'Man Days' : 'Man Hours'}
+          Balance {type === 'man-days' ? 'Man-Days' : 'Man-Hours'}
         </p>
         <p className="text-3xl font-bold mt-4">{balance}</p>
       </div>
