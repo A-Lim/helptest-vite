@@ -11,4 +11,5 @@ export type KubeSubmission = {
   rdbSeverityLevel: string;
   numSupportManHours: string;
   numSupportManDays: string;
+  ddlChargingCategory: 'Chargeable' | 'Non-Chargeable' | 'Grouped';
 } & Record<string, any>;

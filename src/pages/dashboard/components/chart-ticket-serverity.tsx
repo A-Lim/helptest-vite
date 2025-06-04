@@ -24,7 +24,7 @@ export default function ChartTicketSeverity({
       count: 0,
     }));
 
-    submissions?.forEach((submission) => {
+    submissions.forEach((submission) => {
       const index = parseInt(submission.rdbSeverityLevel) - 1;
       initialData[index].count += 1;
     });
@@ -41,7 +41,7 @@ export default function ChartTicketSeverity({
   return (
     <div
       className={cn(
-        'bg-card text-card-foreground flex flex-col shadow-sm border rounded-md p-4',
+        'bg-card text-card-foreground flex flex-col border rounded-md p-4',
         className,
       )}
     >
@@ -75,7 +75,7 @@ export default function ChartTicketSeverity({
                             y={viewBox.cy}
                             className="fill-foreground text-3xl font-bold"
                           >
-                            {(submissions?.length ?? 0).toLocaleString()}
+                            {submissions.length.toLocaleString()}
                           </tspan>
                           <tspan
                             x={viewBox.cx}

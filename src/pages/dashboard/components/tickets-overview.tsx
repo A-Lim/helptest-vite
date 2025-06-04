@@ -45,7 +45,7 @@ export function TicketsOverview({ className }: React.ComponentProps<'div'>) {
       }
     };
 
-    submissions?.forEach((submission) => {
+    submissions.forEach((submission) => {
       const key = isCategory(submission);
       catagories[key].count += 1;
     });
@@ -56,7 +56,7 @@ export function TicketsOverview({ className }: React.ComponentProps<'div'>) {
   return (
     <div
       className={cn(
-        'bg-card text-card-foreground shadow-sm flex border rounded-md py-4 divide-x ',
+        'bg-card text-card-foreground flex rounded-md py-4 divide-x ',
         className,
       )}
     >

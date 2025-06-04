@@ -5,6 +5,8 @@ export type KubeMatrixDashboardFields = {
   CompanyName: string;
   ContractStartDate: string;
   ContractEndDate: string;
+  SubscribedManDays: string;
+  RolloverManDays: string;
 };
 
 export type KubeMatrixDashboard = KubeMatrix<KubeMatrixDashboardFields>;

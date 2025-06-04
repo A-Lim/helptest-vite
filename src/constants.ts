@@ -4,10 +4,9 @@ export const DATE_FORMAT = 'dd MMM yyyy';
 export const DATETIME_FORMAT = 'dd MMM yyyy HH:mm';
 
 export const SEVERITY = {
-  1: '1 - Critical',
-  2: '2 - High',
-  3: '3 - Medium',
-  4: '4 - Low',
+  1: '1 - High',
+  2: '2 - Medium',
+  3: '3 - Low',
 };
 
 // DEV USAGE ONLY

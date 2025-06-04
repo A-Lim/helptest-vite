@@ -8,10 +8,12 @@ import { KubeMatrixDashboard } from '@/types/kube/kube-matrix-dashboard.type';
 import { KubeSubmission } from '@/types/kube/kube-submission.type';
 
 export type DashboardStoreState = {
-  dateRange?: DateRange;
-  matrix?: KubeMatrixDashboard;
-  submissions?: KubeSubmission[];
-  setDateRange: (dateRange?: DateRange) => void;
+  dateRange: {
+    from: Date;
+    to: Date;
+  };
+  matrix: KubeMatrixDashboard;
+  submissions: KubeSubmission[];
   setMatrix: (matrix: KubeMatrixDashboard) => void;
 };
 
@@ -34,8 +36,8 @@ export default function DashboardProvider({
         from: parse(matrix.ContractStartDate, DATETIME_FORMAT, today),
         to: parse(matrix.ContractEndDate, DATETIME_FORMAT, today),
       },
+      matrix,
       submissions,
-      setDateRange: (dateRange?: DateRange) => set(() => ({ dateRange })),
       setMatrix: (matrix: KubeMatrixDashboard) =>
         set(() => ({
           matrix,

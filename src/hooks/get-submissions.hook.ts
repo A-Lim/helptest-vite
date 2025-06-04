@@ -22,6 +22,7 @@ export const useGetSubmissions = (matrix?: KubeMatrixDashboard) => {
       'rdbSeverityLevel',
       'numSupportManHours',
       'numSupportManDays',
+      'ddlChargingCategory',
     ],
     filterFields: [
       {

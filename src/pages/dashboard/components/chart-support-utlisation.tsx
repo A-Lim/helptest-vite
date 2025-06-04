@@ -34,10 +34,8 @@ export default function ChartSupportUlitsation({
   const dateRange = useDashboardStore((state) => state.dateRange);
 
   const chartData = useMemo(() => {
-    const fromDate = dateRange?.from;
-    const toDate = dateRange?.to;
-
-    if (!fromDate || !toDate) return [];
+    const fromDate = dateRange.from;
+    const toDate = dateRange.to;
 
     // generate data based on the start and end date
     const months = eachMonthOfInterval({ start: fromDate, end: toDate });
@@ -59,7 +57,7 @@ export default function ChartSupportUlitsation({
     );
 
     // populate month with data
-    submissions?.forEach((submission) => {
+    submissions.forEach((submission) => {
       const submittedDate = new Date(submission.sys_SubmittedDate);
       const month = submittedDate.getMonth();
       const year = submittedDate.getFullYear();
@@ -89,7 +87,7 @@ export default function ChartSupportUlitsation({
   return (
     <div
       className={cn(
-        'w-full h-full bg-card text-card-foreground shadow-sm flex flex-col border rounded-md p-4',
+        'w-full h-full bg-card text-card-foreground flex flex-col border rounded-md p-4',
         className,
       )}
     >
@@ -108,7 +106,7 @@ export default function ChartSupportUlitsation({
           </SelectContent>
         </Select>
       </div>
-      <ChartContainer config={chartConfig}>
+      <ChartContainer config={chartConfig} className="flex-1">
         <BarChart
           accessibilityLayer
           data={chartData}
@@ -124,7 +122,12 @@ export default function ChartSupportUlitsation({
             axisLine={false}
           />
           <ChartTooltip cursor={true} content={<ChartTooltipContent />} />
-          <Bar dataKey={filter} fill="var(--primary)" radius={8}></Bar>
+          <Bar
+            dataKey={filter}
+            fill="var(--primary)"
+            radius={8}
+            barSize={8}
+          ></Bar>
         </BarChart>
       </ChartContainer>
     </div>
