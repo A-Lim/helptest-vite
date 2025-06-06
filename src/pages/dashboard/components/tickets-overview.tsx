@@ -13,7 +13,7 @@ export function TicketsOverview({ className }: React.ComponentProps<'div'>) {
         icon: <Folder size="18" />,
         count: 0,
       },
-      'In Progress': {
+      'In-Progress': {
         icon: <FolderOpen size="18" />,
         count: 0,
       },
@@ -41,7 +41,7 @@ export function TicketsOverview({ className }: React.ComponentProps<'div'>) {
           return 'Closed';
 
         default:
-          return 'In Progress';
+          return 'In-Progress';
       }
     };
 

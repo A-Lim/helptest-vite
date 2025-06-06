@@ -25,3 +25,11 @@ export function getMatrix<T>(code: string, params?: KubeMatrixRequest) {
   );
 }
 // #endregion
+
+// #region MASTERLIST
+export function getMasterlist<T>(code: string) {
+  return httpPost<T[]>(`masterlist/item`, {
+    MasterListCode: code,
+  });
+}
+// #endregion

@@ -20,7 +20,6 @@ export function Summaries({ className }: React.ComponentProps<'div'>) {
         className,
       )}
     >
-      {/* <h3 className="tracking-tight text-sm font-medium">At A Glance</h3> */}
       <div className="divide-y h-full">
         <ClosedTicketSummary
           submissions={closedSubmissions}

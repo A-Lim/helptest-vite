@@ -1,6 +1,6 @@
 import { KubeMatrix } from './kube-matrix.type';
 
-export type KubeMatrixDashboardFields = {
+export type KubeMatrixCompanyFields = {
   FormDesignID: number;
   CompanyName: string;
   ContractStartDate: string;
@@ -9,4 +9,4 @@ export type KubeMatrixDashboardFields = {
   RolloverManDays: string;
 };
 
-export type KubeMatrixDashboard = KubeMatrix<KubeMatrixDashboardFields>;
+export type KubeMatrixCompany = KubeMatrix<KubeMatrixCompanyFields>;

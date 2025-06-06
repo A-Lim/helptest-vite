@@ -1,20 +1,22 @@
 import { createContext, PropsWithChildren, useContext, useState } from 'react';
 import { DATETIME_FORMAT } from '@/constants';
 import { parse } from 'date-fns';
-import { DateRange } from 'react-day-picker';
 import { createStore, StoreApi, useStore } from 'zustand';
 
-import { KubeMatrixDashboard } from '@/types/kube/kube-matrix-dashboard.type';
+import { KubeMatrixCompany } from '@/types/kube/kube-matrix-company.type';
+import { KubeMatrixSupport } from '@/types/kube/kube-matrix-support.type';
 import { KubeSubmission } from '@/types/kube/kube-submission.type';
+import { LabelValue } from '@/types/label-value.type';
 
 export type DashboardStoreState = {
   dateRange: {
     from: Date;
     to: Date;
   };
-  matrix: KubeMatrixDashboard;
+  supportMatrixes: KubeMatrixSupport[];
+  statuses: LabelValue[];
+  companyMatrix: KubeMatrixCompany;
   submissions: KubeSubmission[];
-  setMatrix: (matrix: KubeMatrixDashboard) => void;
 };
 
 const DashboardContext = createContext<
@@ -22,30 +24,28 @@ const DashboardContext = createContext<
 >(undefined);
 
 export default function DashboardProvider({
-  matrix,
+  companyMatrix,
+  supportMatrixes,
+  statuses,
   submissions,
   children,
 }: PropsWithChildren & {
+  statuses: LabelValue[];
   submissions: KubeSubmission[];
-  matrix: KubeMatrixDashboard;
+  companyMatrix: KubeMatrixCompany;
+  supportMatrixes: KubeMatrixSupport[];
 }) {
   const today = new Date();
   const [store] = useState(() =>
-    createStore<DashboardStoreState>((set) => ({
+    createStore<DashboardStoreState>(() => ({
       dateRange: {
-        from: parse(matrix.ContractStartDate, DATETIME_FORMAT, today),
-        to: parse(matrix.ContractEndDate, DATETIME_FORMAT, today),
+        from: parse(companyMatrix.ContractStartDate, DATETIME_FORMAT, today),
+        to: parse(companyMatrix.ContractEndDate, DATETIME_FORMAT, today),
       },
-      matrix,
+      statuses,
+      companyMatrix,
+      supportMatrixes,
       submissions,
-      setMatrix: (matrix: KubeMatrixDashboard) =>
-        set(() => ({
-          matrix,
-          dateRange: {
-            from: parse(matrix.ContractStartDate, DATETIME_FORMAT, today),
-            to: parse(matrix.ContractEndDate, DATETIME_FORMAT, today),
-          },
-        })),
     })),
   );
 

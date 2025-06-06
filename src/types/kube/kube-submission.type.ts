@@ -8,8 +8,12 @@ export type KubeSubmission = {
   sys_SubmittedDate: string;
   sys_Status: string;
   sysReportedDate: string;
+  txtTitle: string;
   rdbSeverityLevel: string;
   numSupportManHours: string;
   numSupportManDays: string;
   ddlChargingCategory: 'Chargeable' | 'Non-Chargeable' | 'Grouped';
+  ddlTicketStatus: string;
+  pplReportedBy: string;
+  cbTicketType: string;
 } & Record<string, any>;

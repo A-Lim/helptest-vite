@@ -3,11 +3,15 @@ import { KubeUser } from './types/kube/kube-user.type';
 export const DATE_FORMAT = 'dd MMM yyyy';
 export const DATETIME_FORMAT = 'dd MMM yyyy HH:mm';
 
-export const SEVERITY = {
-  1: '1 - High',
-  2: '2 - Medium',
-  3: '3 - Low',
+export const SEVERITY_COLOR: Record<string, string> = {
+  '1 - Critical': '#e76e50',
+  '2 - High': '#f4a462',
+  '3 - Medium': '#e8c468',
+  '4 - Low': '#274754',
 };
+
+export const STATUS_BADGE_BG_COLOR = '#B8E9EF';
+export const STATUS_BADGE_TEXT_COLOR = '#688084';
 
 // DEV USAGE ONLY
 export const DEV_TOKEN = import.meta.env.VITE_TOKEN;

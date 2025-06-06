@@ -45,7 +45,7 @@ export default function DashboardHeader({
       <Progress
         className={cn(
           {
-            '[&>*]:bg-red-600': closeToExpiry,
+            '[&>*]:bg-destructive': closeToExpiry,
           },
           'mt-1 w-4/5',
         )}

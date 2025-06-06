@@ -32,7 +32,7 @@ export function BalanceSummary({
   submissions: KubeSubmission[];
   type: 'man-days' | 'man-hours';
 }) {
-  const matrix = useDashboardStore((state) => state.matrix);
+  const companyMatrix = useDashboardStore((state) => state.companyMatrix);
   const tooltipTitle =
     type === 'man-days' ? 'No of man days' : 'No of man hours';
   const unit = type === 'man-days' ? 'Days' : 'Hours';
@@ -40,8 +40,8 @@ export function BalanceSummary({
   const { balance, utilized } = useMemo(() => {
     const total =
       type === 'man-days'
-        ? +matrix.SubscribedManDays
-        : +matrix.SubscribedManDays * 8;
+        ? +companyMatrix.SubscribedManDays
+        : +companyMatrix.SubscribedManDays * 8;
     let utilized = 0;
 
     submissions.forEach((submission) => {
@@ -53,23 +53,24 @@ export function BalanceSummary({
     });
 
     return {
-      balance: total + getValueByUnit(type, matrix.RolloverManDays) - utilized,
+      balance:
+        total + getValueByUnit(type, companyMatrix.RolloverManDays) - utilized,
       utilized,
     };
-  }, [submissions, matrix]);
+  }, [submissions, companyMatrix]);
 
   const chartData: ChartSummaryData[] = [
     {
       label: 'Subscribed',
       tooltip: 'Subscribed',
       fill: COLORS[type]['subscribed'],
-      count: getValueByUnit(type, matrix.SubscribedManDays),
+      count: getValueByUnit(type, companyMatrix.SubscribedManDays),
     },
     {
       label: 'Rollover',
       tooltip: 'Rollover',
       fill: COLORS[type]['rollover'],
-      count: getValueByUnit(type, matrix.RolloverManDays),
+      count: getValueByUnit(type, companyMatrix.RolloverManDays),
     },
     {
       label: 'Utilized',
@@ -80,32 +81,32 @@ export function BalanceSummary({
   ];
 
   return (
-    <div className={cn(className, 'grid grid-cols-7 divide-x')}>
-      <div className="col-span-2 text-center p-2">
+    <div className={cn(className, 'grid grid-cols-12 divide-x')}>
+      <div className="text-center p-2 col-span-3">
         <p className="text-muted-foreground text-xs">
           Balance {type === 'man-days' ? 'Man-Days' : 'Man-Hours'}
         </p>
         <p className="text-3xl font-bold mt-4">{balance}</p>
       </div>
-      <div className="text-center p-2">
+      <div className="text-center p-2 col-span-2">
         <p className="text-muted-foreground text-xs">Subscribed</p>
         <p
           className="text-2xl font-bold mt-4"
           style={{ color: COLORS[type]['subscribed'] }}
         >
-          {getValueByUnit(type, matrix.SubscribedManDays)}
+          {getValueByUnit(type, companyMatrix.SubscribedManDays)}
         </p>
       </div>
-      <div className="text-center p-2">
+      <div className="text-center p-2 col-span-2">
         <p className="text-muted-foreground text-xs">Rollover</p>
         <p
           className="text-2xl font-bold mt-4"
           style={{ color: COLORS[type]['rollover'] }}
         >
-          {getValueByUnit(type, matrix.RolloverManDays)}
+          {getValueByUnit(type, companyMatrix.RolloverManDays)}
         </p>
       </div>
-      <div className="text-center p-2">
+      <div className="text-center p-2 col-span-2">
         <p className="text-muted-foreground text-xs">Utilized</p>
         <p
           className="text-2xl font-bold mt-4"
@@ -114,7 +115,7 @@ export function BalanceSummary({
           {utilized}
         </p>
       </div>
-      <div className="p-2 col-span-2 flex justify-center items-center">
+      <div className="p-2 col-span-3 flex justify-center items-center">
         <ChartSummary
           unit={unit}
           data={chartData}

@@ -63,12 +63,12 @@ export function ClosedTicketSummary({
   ];
 
   return (
-    <div className={cn(className, 'grid grid-cols-7 divide-x')}>
-      <div className="col-span-2 text-center p-2">
+    <div className={cn(className, 'grid grid-cols-12 divide-x')}>
+      <div className="col-span-3 text-center p-2">
         <p className="text-muted-foreground text-xs">Closed Ticket</p>
         <p className="text-3xl font-bold mt-4">{submissions.length}</p>
       </div>
-      <div className="text-center p-2">
+      <div className="text-center p-2 col-span-2">
         <p className="text-muted-foreground text-xs">Chargeable</p>
         <p
           className="text-2xl font-bold mt-4"
@@ -77,7 +77,7 @@ export function ClosedTicketSummary({
           {chargeable}
         </p>
       </div>
-      <div className="text-center p-2">
+      <div className="text-center p-2 col-span-2">
         <p className="text-muted-foreground text-xs">Grouped</p>
         <p
           className="text-2xl font-bold mt-4"
@@ -86,18 +86,18 @@ export function ClosedTicketSummary({
           {grouped}
         </p>
       </div>
-      <div className="text-center p-2">
+      <div className="text-center p-2 col-span-2">
         <p className="text-muted-foreground text-xs leading-tight">
           Non-Chargeable
         </p>
         <p
-          className="text-2xl font-bold mt-1"
+          className="text-2xl font-bold mt-4"
           style={{ color: COLORS['nonchargeable'] }}
         >
           {nonchargeable}
         </p>
       </div>
-      <div className="p-2 col-span-2 flex items-center justify-center">
+      <div className="p-2 col-span-3 flex items-center justify-center">
         <ChartSummary
           unit="tickets"
           data={chartData}

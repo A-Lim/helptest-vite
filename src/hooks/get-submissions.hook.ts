@@ -3,10 +3,10 @@ import { getSubmissionList } from '@/service/api.service';
 import { useQuery } from '@tanstack/react-query';
 import { parse } from 'date-fns';
 
-import { KubeMatrixDashboard } from '@/types/kube/kube-matrix-dashboard.type';
+import { KubeMatrixCompany } from '@/types/kube/kube-matrix-company.type';
 import { KubeSubmissionRequest } from '@/types/kube/kube-submission-request.type';
 
-export const useGetSubmissions = (matrix?: KubeMatrixDashboard) => {
+export const useGetSubmissions = (matrix?: KubeMatrixCompany) => {
   const formDesignId = matrix?.FormDesignID;
   const dateRange = matrix
     ? {
@@ -17,12 +17,18 @@ export const useGetSubmissions = (matrix?: KubeMatrixDashboard) => {
 
   const params: KubeSubmissionRequest = {
     displayFields: [
+      'sys_RefNo',
       'sys_Status',
       'sysReportedDate',
       'rdbSeverityLevel',
       'numSupportManHours',
       'numSupportManDays',
       'ddlChargingCategory',
+      'ddlTicketStatus',
+      'txtTitle',
+      'pplReportedBy',
+      'cbTicketType',
+      'ddlTicketStatus',
     ],
     filterFields: [
       {

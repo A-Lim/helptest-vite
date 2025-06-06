@@ -8,10 +8,6 @@ import { Toaster } from './components/ui/sonner.tsx';
 import AuthProvider from './providers/auth.provider.tsx';
 import QueryClientProvider from './providers/query-client.provider.tsx';
 
-// scan({
-//   enabled: import.meta.env.DEV,
-// });
-
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider>

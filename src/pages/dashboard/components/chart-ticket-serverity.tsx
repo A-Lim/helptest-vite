@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { SEVERITY } from '@/constants';
+import { SEVERITY_COLOR } from '@/constants';
 import { useDashboardStore } from '@/providers/dashboard.provider';
 import { Label, Pie, PieChart } from 'recharts';
 
@@ -29,10 +29,11 @@ export default function ChartTicketSeverity({
   const { chartData, total } = useMemo(() => {
     let total = 0;
     const currentMonth = new Date().getMonth();
-    const initialData = Object.entries(SEVERITY).map(([key, value]) => ({
-      severity: value,
-      label: value,
-      fill: `var(--severity-${key})`,
+
+    const initialData = Object.entries(SEVERITY_COLOR).map(([key, value]) => ({
+      severity: key,
+      label: key,
+      fill: value,
       count: 0,
     }));
 
@@ -70,8 +71,7 @@ export default function ChartTicketSeverity({
     >
       <div className="flex gap-4 justify-between">
         <h3 className="tracking-tight text-sm font-medium">
-          Tickets by Severity (
-          {filter === 'contract-period' ? 'Contract Period' : 'Current Month'})
+          Tickets by Severity
         </h3>
         <Select
           value={filter}

@@ -93,16 +93,15 @@ export default function ChartTicketUtilisation({
     >
       <div className="flex gap-4 justify-between">
         <h3 className="tracking-tight text-sm font-medium">
-          Total Ticket Utilisation (
-          {filter === 'manHours' ? 'Man Hours' : 'Man Days'})
+          Total Ticket Utilisation
         </h3>
         <Select value={filter} onValueChange={(e) => setFilter(e)}>
           <SelectTrigger className="w-[150px]">
             <SelectValue placeholder="Filter" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="manHours">Man Hours</SelectItem>
-            <SelectItem value="manDays">Man Days</SelectItem>
+            <SelectItem value="manHours">Man-Hours</SelectItem>
+            <SelectItem value="manDays">Man-Days</SelectItem>
           </SelectContent>
         </Select>
       </div>

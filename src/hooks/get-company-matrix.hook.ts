@@ -1,11 +1,11 @@
 import { getMatrix } from '@/service/api.service';
 import { useQuery } from '@tanstack/react-query';
 
-import { KubeMatrixDashboardFields } from '@/types/kube/kube-matrix-dashboard.type';
+import { KubeMatrixCompanyFields } from '@/types/kube/kube-matrix-company.type';
 import { KubeMatrixRequest } from '@/types/kube/kube-matrix-request.type';
 
-export const useGetUserMatrix = (company: string) => {
-  const code = import.meta.env.VITE_MATRIX_CODE;
+export const useGetCompanyMatrix = (company: string) => {
+  const code = import.meta.env.VITE_COMPANY_MATRIX_CODE;
   const params: KubeMatrixRequest = {
     isExactSearchText: true,
     filterColumns: [
@@ -18,9 +18,9 @@ export const useGetUserMatrix = (company: string) => {
   };
 
   return useQuery({
-    queryKey: ['user-matrix', company],
+    queryKey: ['company-matrix', company],
     queryFn: async () => {
-      const data = await getMatrix<KubeMatrixDashboardFields>(code, params);
+      const data = await getMatrix<KubeMatrixCompanyFields>(code, params);
 
       if (!data) throw new Error('No matrix record found.');
 
