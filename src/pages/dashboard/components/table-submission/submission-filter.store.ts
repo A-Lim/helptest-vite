@@ -14,15 +14,20 @@ type State = {
 type Actions = {
   setSearch: (searchStr: string) => void;
   setFilter: (filter: keyof State['filters'], value: string | 'all') => void;
+  resetFilters: () => void;
 };
 
-export const useSubmissionFilterStore = create<State & Actions>((set) => ({
+const initialState: State = {
   searchStr: '',
   filters: {
     category: 'all',
     severity: 'all',
     status: 'all',
   },
+};
+
+export const useSubmissionFilterStore = create<State & Actions>((set) => ({
+  ...initialState,
   setSearch: (searchStr: string) => set(() => ({ searchStr })),
   setFilter: (filter: keyof State['filters'], value: string | 'all') =>
     set((state) => ({
@@ -31,6 +36,7 @@ export const useSubmissionFilterStore = create<State & Actions>((set) => ({
         [filter]: value,
       },
     })),
+  resetFilters: () => set(() => initialState),
 }));
 
 export function useFilteredSubmissions() {

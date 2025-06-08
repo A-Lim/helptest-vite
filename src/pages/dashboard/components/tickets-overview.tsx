@@ -1,9 +1,23 @@
 import { useMemo } from 'react';
 import { useDashboardStore } from '@/providers/dashboard.provider';
-import { Folder, FolderCheck, FolderLock, FolderOpen } from 'lucide-react';
+import {
+  Flag,
+  Folder,
+  FolderCheck,
+  FolderLock,
+  FolderOpen,
+  Info,
+} from 'lucide-react';
 
 import { KubeSubmission } from '@/types/kube/kube-submission.type';
 import { cn } from '@/lib/utils';
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from '@/components/ui/hover-card';
+
+import { CustomerSurvey } from './customer-survey';
 
 export function TicketsOverview({ className }: React.ComponentProps<'div'>) {
   const submissions = useDashboardStore((state) => state.submissions);
@@ -71,6 +85,23 @@ export function TicketsOverview({ className }: React.ComponentProps<'div'>) {
           </div>
         </div>
       ))}
+      <div className="px-4 space-y-2 flex-1 flex-grow">
+        <div className="tracking-tight text-sm font-medium flex items-center gap-2">
+          Customer Responses
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <Info className="cursor-pointer text-blue-700" size={14} />
+            </HoverCardTrigger>
+            <HoverCardContent className="w-[450px] mr-2">
+              <CustomerSurvey className="h-68" />
+            </HoverCardContent>
+          </HoverCard>
+        </div>
+        <div className="flex items-center gap-2">
+          <Flag size={18} />
+          <span className="text-2xl font-bold">{50}</span>
+        </div>
+      </div>
     </div>
   );
 }

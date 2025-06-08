@@ -20,7 +20,6 @@ import {
 } from '@/components/ui/table';
 
 import { DataTablePagination } from './data-table-pagination';
-import { Button } from './ui/button';
 
 interface DataTableProps<TData, TValue> {
   showHeader?: boolean;

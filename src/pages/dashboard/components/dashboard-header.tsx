@@ -47,7 +47,7 @@ export default function DashboardHeader({
           {
             '[&>*]:bg-destructive': closeToExpiry,
           },
-          'mt-1 w-4/5',
+          'mt-1 w-full',
         )}
         value={percentage}
       />

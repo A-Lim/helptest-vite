@@ -59,18 +59,31 @@ export function BalanceSummary({
     };
   }, [submissions, companyMatrix]);
 
+  const { subscribed, rollover } = useMemo(() => {
+    const subscribed = getValueByUnit(type, companyMatrix.SubscribedManDays);
+    const rollover = getValueByUnit(type, companyMatrix.RolloverManDays);
+    const remainingRollover = rollover - utilized;
+    const remainingSubscribed =
+      remainingRollover < 0 ? subscribed + rollover - utilized : subscribed;
+
+    return {
+      subscribed: remainingSubscribed,
+      rollover: remainingRollover,
+    };
+  }, [companyMatrix, utilized, type]);
+
   const chartData: ChartSummaryData[] = [
     {
       label: 'Subscribed',
       tooltip: 'Subscribed',
       fill: COLORS[type]['subscribed'],
-      count: getValueByUnit(type, companyMatrix.SubscribedManDays),
+      count: subscribed,
     },
     {
       label: 'Rollover',
       tooltip: 'Rollover',
       fill: COLORS[type]['rollover'],
-      count: getValueByUnit(type, companyMatrix.RolloverManDays),
+      count: rollover,
     },
     {
       label: 'Utilized',

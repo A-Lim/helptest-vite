@@ -33,16 +33,14 @@ function App() {
   }, [] as LabelValue[]);
 
   return (
-    <div className="h-screen">
-      <DashboardProvider
-        companyMatrix={companyMatrix}
-        supportMatrixes={supportMatrixes}
-        submissions={submissions}
-        statuses={statuses}
-      >
-        <Dashboard />
-      </DashboardProvider>
-    </div>
+    <DashboardProvider
+      companyMatrix={companyMatrix}
+      supportMatrixes={supportMatrixes}
+      submissions={submissions}
+      statuses={statuses}
+    >
+      <Dashboard />
+    </DashboardProvider>
   );
 }
 

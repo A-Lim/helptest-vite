@@ -10,8 +10,8 @@ export function Dashboard() {
   return (
     <DashboardLayout>
       <div className="grid grid-cols-24 gap-4">
-        <DashboardHeader className="col-span-8" />
-        <TicketsOverview className="col-span-16" />
+        <DashboardHeader className="col-span-7" />
+        <TicketsOverview className="col-span-17" />
         <ChartTicketUtilisation className="col-span-7" />
         <ChartTicketSeverity className="col-span-7" />
         <Summaries className="col-span-10" />

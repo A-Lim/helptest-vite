@@ -65,7 +65,7 @@ export function ClosedTicketSummary({
   return (
     <div className={cn(className, 'grid grid-cols-12 divide-x')}>
       <div className="col-span-3 text-center p-2">
-        <p className="text-muted-foreground text-xs">Closed Ticket</p>
+        <p className="text-muted-foreground text-xs">Closed Tickets</p>
         <p className="text-3xl font-bold mt-4">{submissions.length}</p>
       </div>
       <div className="text-center p-2 col-span-2">
